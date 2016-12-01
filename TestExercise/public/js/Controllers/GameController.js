@@ -7,7 +7,7 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
 
     hasPlayerJoin = function() {
         var requestData = {};
-        requestData.gameToken = gameToken;
+        requestData.game_token = gameToken;
 
         ApiService.hasPlayerJoin().create(requestData).$promise.then(function(response) {
             //console.log(response);
@@ -32,7 +32,7 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
         requestData.row = 1;
         requestData.col = 2;
 
-        ApiService.makeMove(accessToken, requestData).create().$promise.then(function(response) {
+        ApiService.makeMove(accessToken).create(requestData).$promise.then(function(response) {
             if (response.code == 8 && response.status != "error") {
                 canPlay = false;
                 console.log(response.message);
@@ -49,9 +49,8 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
 
     accessToken = dataService.getAccessToken();
     gameToken = dataService.getGameToken();
-
     //hasPlayerJoin();
-    makeMove();
+    //makeMove();
     intervalHasPlayerJoin = setInterval("hasPlayerJoin()", 4000);
 
     //insertElement = function() {

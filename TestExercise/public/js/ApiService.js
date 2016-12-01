@@ -24,13 +24,12 @@ angular.module('GalleryApp').factory('ApiService', function($resource) {
                 }
             });
         },
-        makeMove: function (accessToken, requestData) {
+        makeMove: function (accessToken) {
             return $resource(url + 'make_a_move', {}, {
                 create: {
                     method: 'POST',
                     headers: { 'access_token': accessToken
-                    },
-                    data: requestData
+                    }
                 }
             });
         }

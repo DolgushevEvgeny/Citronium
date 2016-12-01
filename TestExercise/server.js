@@ -129,7 +129,7 @@ app.post('/join_game', function(request, response) {
 
 app.get('/has_player_join', function(request, response) {
   console.log("Request get /has_player_join received.");
-  var gameToken = request.query.gameToken;
+  var gameToken = request.query.game_token;
   var answer = {};
   MongoClient.connect("mongodb://localhost:27017/gamesdb",
     function(err, db) {
@@ -177,7 +177,6 @@ app.post('/make_a_move', function(request, response) {
     column = fields.col;
     gameToken = fields.game_token;
   });
-  console.log('gameToken server: ' + gameToken);
   accessToken = request.headers.access_token;
 
   var answer = {};
@@ -209,6 +208,7 @@ app.post('/make_a_move', function(request, response) {
                     };
                     gamesCollection.insertOne(newGameRecord);
                     db.close();
+                    answer.game_field = newGameRecord.game_field;
                     answer.code = 8;
                     answer.status = "ok";
                     answer.message = "Player make move";
