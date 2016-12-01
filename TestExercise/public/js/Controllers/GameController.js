@@ -1,4 +1,4 @@
-app.controller('GameController', ['$scope', 'ApiService', function($scope, ApiService) {
+app.controller('GameController', ['$scope', 'ApiService', 'dataService', function($scope, ApiService, dataService) {
     var accessToken,
         gameToken,
         canPlay,
@@ -23,11 +23,45 @@ app.controller('GameController', ['$scope', 'ApiService', function($scope, ApiSe
             }
 
             console.log(response.message);
+        });
+    };
 
-            var newDiv = angular.element("<div>");
+    makeMove = function() {
+        var requestData = {};
+        requestData.game_token = gameToken;
+        requestData.row = 1;
+        requestData.col = 2;
+
+        ApiService.makeMove(accessToken, requestData).create().$promise.then(function(response) {
+            if (response.code == 8 && response.status != "error") {
+                canPlay = false;
+                console.log(response.message);
+                //todo спамить сервер пока игроку не разрешат сходить
+                //intervalCanIPlay = setInterval("canIPlay()", 4000);
+            } else if (response.code == 9 && response.status != "error") {
+                canPlay = true;
+                console.log(response.message);
+            } else {
+
+            }
         });
     }
 
+    accessToken = dataService.getAccessToken();
+    gameToken = dataService.getGameToken();
+
     //hasPlayerJoin();
+    makeMove();
     intervalHasPlayerJoin = setInterval("hasPlayerJoin()", 4000);
+
+    //insertElement = function() {
+    //    var newDiv = angular.element('<div id="inserted" onclick="alertMessage()">Жми сюда</div>');
+    //    var div = angular.element(document.querySelector("#insert"));
+    //    div.append(newDiv);
+    //};
+    //
+    //alertMessage = function() {
+    //    console.log("CRAP");
+    //};
+    //insertElement();
 }]);
