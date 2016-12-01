@@ -11,22 +11,18 @@ app.use('/public', express.static(__dirname + '/public'));
 app.get('/', function(request, response) {
   console.log("Request get / received.");
 
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  response = setResponseHeaders(response);
   response.sendFile(__dirname + '/public/index.html');
   console.log("Response / sent.");
 });
 
-app.get('/create_game', function(request, response) {
-  console.log("Request get /create_game received.");
-
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  response.send();
-  console.log("Response /create_game sent.");
-});
+//app.get('/create_game', function(request, response) {
+//  console.log("Request get /create_game received.");
+//
+//  response = setResponseHeaders(response);
+//  response.send();
+//  console.log("Response /create_game sent.");
+//});
 
 app.post('/new_game', function(request, response) {
   console.log("Request post /new_game received.");
@@ -189,8 +185,8 @@ app.post('/make_a_move', function(request, response) {
     row = fields.row;
     column = fields.col;
     gameToken = fields.game_token;
-    accessToken = fields.access_token;
   });
+  accessToken = request.headers.access_token;
 
   var answer = {};
   var gameRecord;
@@ -345,9 +341,14 @@ function generateAccessToken() {
 }
 
 function sendResponse(answer, response) {
+  response = setResponseHeaders(response);
+  response.setHeader('Content-Type', 'application/json');
+  response.json(answer);
+}
+
+function setResponseHeaders(response) {
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  response.setHeader('Content-Type', 'application/json');
-  response.json(answer);
+  return response;
 }
