@@ -5,7 +5,7 @@ app.controller('CreateGameController', ['$scope', '$location', 'ApiService', 'da
     $scope.newGame = function() {
         var params = {userName:$scope.userName, size:$scope.size};
 
-        ApiService.newGame(accessToken).create(params).$promise.then(function(response) {
+        ApiService.newGame().create(params).$promise.then(function(response) {
             //console.log(response);
             accessToken = response.access_token;
             gameToken = response.game_token;

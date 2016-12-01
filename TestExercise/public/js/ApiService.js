@@ -1,14 +1,11 @@
 angular.module('GalleryApp').factory('ApiService', function($resource) {
     var url = 'http://localhost:3000/';
-    //console.log("Egor");
+
     return {
-        newGame: function(accessToken) {
-            console.log("ApiService accesstoken: " + accessToken);
+        newGame: function() {
             return $resource(url + 'new_game', {}, {
                 create: {
-                    method: 'POST',
-                    headers: { 'access_token': accessToken
-                    }
+                    method: 'POST'
                 }
             });
         },
