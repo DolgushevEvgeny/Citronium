@@ -3,6 +3,7 @@ angular.module('GalleryApp').factory('ApiService', function($resource) {
     //console.log("Egor");
     return {
         newGame: function(accessToken) {
+            console.log("ApiService accesstoken: " + accessToken);
             return $resource(url + 'new_game', {}, {
                 create: {
                     method: 'POST',

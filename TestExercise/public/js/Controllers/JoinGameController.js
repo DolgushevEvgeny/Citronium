@@ -1,4 +1,4 @@
-app.controller('JoinGameController', ['$scope', '$location', 'ApiService', function($scope, $location, ApiService) {
+app.controller('JoinGameController', ['$scope', '$location', 'ApiService', 'dataService', function($scope, $location, ApiService, dataService) {
     $scope.joinGame = function() {
         var params = {userName:$scope.userName, gameToken:$scope.gameToken};
 
