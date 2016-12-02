@@ -42,6 +42,7 @@ app.post('/new_game', function(request, response) {
           function(err, result) {
             var gamesCollection = db.collection('games');
             var gameField = createGameField(size);
+            answer.game_field = gameField;
             var gameRecord = {'game_token':answer.game_token, 'players_count':1, 'player_step':1,
               'game_field':gameField, 'last_step':[0,0]
             };
@@ -93,6 +94,7 @@ app.post('/join_game', function(request, response) {
         var gamesCollection = db.collection('games');
         gamesCollection.findOne({'game_token':gameToken},
           function(err, item) {
+            answer.game_field = item.game_field;
             if (item.players_count == 1) {
               gamesCollection.removeOne({'game_token':gameToken},
                 function(err, result) {
@@ -212,7 +214,7 @@ app.post('/make_a_move', function(request, response) {
                     answer.code = 8;
                     answer.status = "ok";
                     answer.message = "Player make move";
-                    answer.playerQueue = playerRecord.queue;
+                    //answer.playerQueue = playerRecord.queue;
                     sendResponse(answer, response);
                   });
                 }
@@ -235,7 +237,9 @@ app.get('/can_i_play', function(request, response) {
   console.log("Request get /can_i_play received.");
 
   var gameToken = request.query.gameToken;
-  var accessToken = request.query.accessToken;
+  var accessToken = request.headers.access_token;
+
+  console.log("gameToken: " + gameToken);
 
   var answer = {};
   var playerQueue;
@@ -252,9 +256,8 @@ app.get('/can_i_play', function(request, response) {
                 if (gameRecord.player_step == playerQueue) {
                   answer.status = "ok";
                   answer.code = 4;
+                  answer.game_field = gameRecord.game_field;
                   answer.message = "You can play";
-                  answer.last_step = gameRecord.last_step;
-                  answer.playerQueue = playerRecord.queue;
                   db.close();
                   sendResponse(answer, response);
                 } else {
