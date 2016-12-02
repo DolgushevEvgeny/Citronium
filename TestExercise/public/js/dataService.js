@@ -1,7 +1,8 @@
 angular.module('GalleryApp').factory('dataService', function() {
     var accessToken,
         gameToken,
-        playerCode;
+        playerCode,
+        gameField;
 
     return {
         setAccessToken: function(access_token) {
@@ -21,6 +22,12 @@ angular.module('GalleryApp').factory('dataService', function() {
         },
         getPlayerCode: function() {
             return playerCode;
+        },
+        setGameField: function(field) {
+            gameField = field;
+        },
+        getGameField: function() {
+            return gameField;
         }
     }
 });
