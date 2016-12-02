@@ -1,6 +1,7 @@
 app.controller('GameController', ['$scope', 'ApiService', 'dataService', function($scope, ApiService, dataService) {
     var accessToken,
         gameToken,
+        playerCode,
         canPlay,
         intervalHasPlayerJoin,
         intervalCanIPlay;
@@ -45,13 +46,25 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
 
             }
         });
-    }
+    };
+
 
     accessToken = dataService.getAccessToken();
     gameToken = dataService.getGameToken();
+    playerCode = dataService.getPlayerCode();
+
+    if (playerCode == 1) {
+        var el = angular.element(document.querySelector("#gameToken"));
+        el.text(gameToken);
+        intervalHasPlayerJoin = setInterval("hasPlayerJoin()", 4000);
+    } else {
+
+    }
+
+
     //hasPlayerJoin();
     //makeMove();
-    intervalHasPlayerJoin = setInterval("hasPlayerJoin()", 4000);
+
 
     //insertElement = function() {
     //    var newDiv = angular.element('<div id="inserted" onclick="alertMessage()">∆ми сюда</div>');

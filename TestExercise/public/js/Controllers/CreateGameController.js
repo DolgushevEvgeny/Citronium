@@ -11,6 +11,7 @@ app.controller('CreateGameController', ['$scope', '$location', 'ApiService', 'da
             gameToken = response.game_token;
             dataService.setAccessToken(accessToken);
             dataService.setGameToken(gameToken);
+            dataService.setPlayerCode(1);
             console.log(response.message);
             $location.path("/game");
         });
