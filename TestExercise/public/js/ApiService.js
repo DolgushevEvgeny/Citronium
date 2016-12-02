@@ -24,10 +24,19 @@ angular.module('GalleryApp').factory('ApiService', function($resource) {
                 }
             });
         },
-        makeMove: function (accessToken) {
+        makeMove: function(accessToken) {
             return $resource(url + 'make_a_move', {}, {
                 create: {
                     method: 'POST',
+                    headers: { 'access_token': accessToken
+                    }
+                }
+            });
+        },
+        canIPlay: function(accessToken) {
+            return $resource(url + 'can_i_play', {}, {
+                create: {
+                    method: 'GET',
                     headers: { 'access_token': accessToken
                     }
                 }
