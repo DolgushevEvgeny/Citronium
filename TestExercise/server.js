@@ -150,7 +150,6 @@ app.get('/has_player_join', function(request, response) {
               answer.code = 7;
               answer.status = "ok";
               answer.message = "Player not join game";
-              console.log("Player not join game");
               sendResponse(answer, response);
             }
           }
@@ -214,6 +213,10 @@ app.post('/make_a_move', function(request, response) {
                     answer.code = 8;
                     answer.status = "ok";
                     answer.message = "Player make move";
+                    if (checkGameField(newGameRecord.game_field)) {
+                      answer.message = "Player " + playerRecord.player + " won";
+                    }
+
                     //answer.playerQueue = playerRecord.queue;
                     sendResponse(answer, response);
                   });
@@ -238,8 +241,6 @@ app.get('/can_i_play', function(request, response) {
 
   var gameToken = request.query.gameToken;
   var accessToken = request.headers.access_token;
-
-  console.log("gameToken: " + gameToken);
 
   var answer = {};
   var playerQueue;
@@ -279,20 +280,6 @@ app.get('/can_i_play', function(request, response) {
       }
     }
   );
-});
-
-app.get('/test', function(request, response) {
-  console.log("Request post /test received.");
-
-  var answer = {};
-  answer.a = 1;
-  answer.b = 5;
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  response.setHeader('Content-Type', 'application/json');
-  response.json(answer);
-  console.log('Request to /test performed.');
 });
 
 app.listen(3000, function(err) {
@@ -346,4 +333,71 @@ function setResponseHeaders(response) {
   response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
   return response;
+}
+
+function checkGameField(gameField, playerQueue) {
+  var dimension = gameField.length <= 5 ? 3 : 5;
+  for (var i = 0; i < gameField.length; ++i) {
+    for (var j = 0; j < gameField[i].length; ++j) {
+      if (gameField[i][j] != 0) {
+        var cellValue = gameField[i][j];
+        var rowLength,//Текущая длина ряда
+            count;//Доп. счетчик
+
+        //Смотрим вправо от текущей клетки
+        rowLength = 0;
+        for (var k = j; k < j + dimension; ++k) {
+          if ((k == gameField[i].length) || (gameField[i][j] != cellValue)) {
+            break;
+          }
+          ++rowLength;
+        }
+        if (rowLength == dimension) {
+          return true;
+        }
+
+        //Смотрим вниз и вправо от текущей клетки
+        rowLength = 0;
+        count = i;
+        for (var k = j; k < j + dimension; ++k) {
+          if ((k == gameField[i].length) || (count == gameField.length) || (gameField[i][j] != cellValue)) {
+            break;
+          }
+          ++rowLength;
+          ++count;
+        }
+        if (rowLength == dimension) {
+          return true;
+        }
+
+        //Смотрим вниз и влево от текущей клетки
+        rowLength = 0;
+        count = i;
+        for (var k = j; k > j - dimension; --k) {
+          if ((k == -1) || (count == gameField.length) || (gameField[i][j] != cellValue)) {
+            break;
+          }
+          ++rowLength;
+          ++count;
+        }
+        if (rowLength == dimension) {
+          return true;
+        }
+
+        //Смотрим вниз от текущей клетки
+        rowLength = 0;
+        for (var k = i; k < i + dimension; ++k) {
+          if ((k == gameField.length) || (gameField[i][j] != cellValue)) {
+            break;
+          }
+          ++rowLength;
+        }
+        if (rowLength == dimension) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
 }
