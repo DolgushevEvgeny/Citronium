@@ -80,6 +80,11 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
 
     deployGameField = function() {
         var gameTable = angular.element(document.querySelector(".table"));
+        if (gameTable) {
+            gameTable.remove();
+        }
+
+        var newGameTable = angular.element('<div class="table"></div>');
         for (var i = 0; i < gameField.length; ++i) {
             var row = angular.element('<div></div>');
             for (var j = 0; j < gameField[i].length; ++j) {
@@ -94,8 +99,10 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
                 row.append(cell);
             }
 
-            gameTable.append(row);
+            newGameTable.append(row);
         }
+
+        angular.element(document.querySelector(".container")).prepend(newGameTable);
     };
 
     accessToken = dataService.getAccessToken();
