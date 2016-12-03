@@ -47,8 +47,20 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
                 } else if (response.code == 9 && response.status != "error") {
                     canPlay = true;
                     console.log(response.message);
-                } else {
-
+                } else if (response.code == 10 && response.status != "error") {
+                    clearInterval(intervalCanIPlay);
+                    canPlay = false;
+                    console.log(response.message);
+                    gameField = response.game_field;
+                    deployGameField();
+                    alert("YOU WIN!");
+                } else if (response.code == 11 && response.status != "error") {
+                    clearInterval(intervalCanIPlay);
+                    canPlay = false;
+                    console.log(response.message);
+                    gameField = response.game_field;
+                    deployGameField();
+                    alert("DRAW!");
                 }
             });
         }
@@ -71,8 +83,20 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
                 canPlay = false;
                 console.log(response.message);
                 //todo спамить сервер пока игроку не разрешат сходить
-            } else {
-
+            } else if (response.code == 11 && response.status != "error") {
+                canPlay = false;
+                console.log(response.message);
+                gameField = response.game_field;
+                deployGameField();
+                clearInterval(intervalCanIPlay);
+                alert("DRAW!");
+            } else if (response.code == 12 && response.status != "error") {
+                canPlay = false;
+                console.log(response.message);
+                gameField = response.game_field;
+                deployGameField();
+                clearInterval(intervalCanIPlay);
+                alert("YOU LOSE!");
             }
         });
 
