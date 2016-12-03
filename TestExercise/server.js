@@ -8,6 +8,10 @@ var MongoClient = require('mongodb').MongoClient;
 var app = express();
 app.use('/public', express.static(__dirname + '/public'));
 
+app.listen(3000, function(err) {
+  console.log("Server has started.");
+});
+
 app.get('/', function(request, response) {
   console.log("Request get / received.");
 
@@ -213,12 +217,20 @@ app.post('/make_a_move', function(request, response) {
                     answer.code = 8;
                     answer.status = "ok";
                     answer.message = "Player make move";
-                    if (checkGameField(newGameRecord.game_field)) {
-                      answer.message = "Player " + playerRecord.player + " won";
+                    var gameSituation = checkGameField(newGameRecord.game_field, playerRecord.queue);
+                    switch (gameSituation) {
+                      case 0: draw(answer, response); break;
+                      case 1: youWin(answer, response, playerRecord.player, playerRecord.queue); break;
+                      case 2: opponentWin(answer, response, playerRecord.player, playerRecord.queue); break;
+                      case 3: whileADraw(answer, response, playerRecord.queue); break;
                     }
 
+                    //if (checkGameField(newGameRecord.game_field)) {
+                    //  answer.message = "Player " + playerRecord.player + " won";
+                    //}
+
                     //answer.playerQueue = playerRecord.queue;
-                    sendResponse(answer, response);
+                    //sendResponse(answer, response);
                   });
                 }
               );
@@ -260,7 +272,14 @@ app.get('/can_i_play', function(request, response) {
                   answer.game_field = gameRecord.game_field;
                   answer.message = "You can play";
                   db.close();
-                  sendResponse(answer, response);
+
+                  var gameSituation = checkGameField(gameRecord.game_field, playerRecord.queue);
+                  switch (gameSituation) {
+                    case 0: draw(answer, response); break;
+                    case 1: youWin(answer, response, playerRecord.player, playerRecord.queue); break;
+                    case 2: opponentWin(answer, response, playerRecord.player, playerRecord.queue); break;
+                    case 3: whileADraw(answer, response, playerRecord.queue); break;
+                  }
                 } else {
                   answer.status = "ok";
                   answer.code = 5;
@@ -282,9 +301,33 @@ app.get('/can_i_play', function(request, response) {
   );
 });
 
-app.listen(3000, function(err) {
-  console.log("Server has started.");
-});
+function youWin(answer, response, name, playerQueue) {
+  answer.code = 10;
+  answer.message = "Player " + name + " win";
+  answer.playerQueue = playerQueue;
+  sendResponse(answer, response);
+}
+
+function opponentWin(answer, response, name, playerQueue) {
+  answer.code = 12;
+  answer.message = "Player " + name + " win";
+  answer.playerQueue = playerQueue;
+  sendResponse(answer, response);
+}
+
+//если ничья
+function draw(answer, response) {
+  answer.code = 11;
+  answer.playerQueue = playerRecord.queue;
+  answer.message = "No one won";
+  sendResponse(answer, response);
+}
+
+//если еще неизвестно кто выйграл
+function whileADraw(answer, response, playerQueue) {
+  answer.playerQueue = playerQueue;
+  sendResponse(answer, response);
+}
 
 function createGameField(size) {
   var gameField = [];
@@ -336,7 +379,9 @@ function setResponseHeaders(response) {
 }
 
 function checkGameField(gameField, playerQueue) {
-  var dimension = gameField.length <= 5 ? 3 : 5;
+  var dimension = gameField.length <= 5 ? 3 : 5,
+      emptyCells = 0;
+
   for (var i = 0; i < gameField.length; ++i) {
     for (var j = 0; j < gameField[i].length; ++j) {
       if (gameField[i][j] != 0) {
@@ -347,57 +392,84 @@ function checkGameField(gameField, playerQueue) {
         //Смотрим вправо от текущей клетки
         rowLength = 0;
         for (var k = j; k < j + dimension; ++k) {
-          if ((k == gameField[i].length) || (gameField[i][j] != cellValue)) {
+          if ((k == gameField[i].length) || (gameField[i][k] != cellValue)) {
             break;
           }
           ++rowLength;
         }
         if (rowLength == dimension) {
-          return true;
+          if (cellValue == playerQueue) {
+            return 1;
+          } else {
+            return 2;
+          }
+          //return true;
         }
 
         //Смотрим вниз и вправо от текущей клетки
         rowLength = 0;
         count = i;
         for (var k = j; k < j + dimension; ++k) {
-          if ((k == gameField[i].length) || (count == gameField.length) || (gameField[i][j] != cellValue)) {
+          if ((k == gameField[i].length) || (count == gameField.length) || (gameField[count][k] != cellValue)) {
             break;
           }
           ++rowLength;
           ++count;
         }
         if (rowLength == dimension) {
-          return true;
+          if (cellValue == playerQueue) {
+            return 1;
+          } else {
+            return 2;
+          }
+          //return true;
         }
 
         //Смотрим вниз и влево от текущей клетки
         rowLength = 0;
         count = i;
         for (var k = j; k > j - dimension; --k) {
-          if ((k == -1) || (count == gameField.length) || (gameField[i][j] != cellValue)) {
+          if ((k == -1) || (count == gameField.length) || (gameField[count][k] != cellValue)) {
             break;
           }
           ++rowLength;
           ++count;
         }
         if (rowLength == dimension) {
-          return true;
+          if (cellValue == playerQueue) {
+            return 1;
+          } else {
+            return 2;
+          }
+          //return true;
         }
 
         //Смотрим вниз от текущей клетки
         rowLength = 0;
         for (var k = i; k < i + dimension; ++k) {
-          if ((k == gameField.length) || (gameField[i][j] != cellValue)) {
+          if ((k == gameField.length) || (gameField[k][j] != cellValue)) {
             break;
           }
           ++rowLength;
         }
         if (rowLength == dimension) {
-          return true;
+          if (cellValue == playerQueue) {
+            return 1;
+          } else {
+            return 2;
+          }
+          //return true;
         }
+      } else {
+        ++emptyCells;
       }
     }
   }
 
-  return false;
+  if (emptyCells == 0) {
+    return 0;
+  } else {
+    return 3;
+  }
+  //return false;
 }
