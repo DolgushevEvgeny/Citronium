@@ -21,16 +21,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="461" column="3" selection-start-line="461" selection-start-column="3" selection-end-line="461" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.57990116">
+              <caret line="381" column="42" selection-start-line="381" selection-start-column="42" selection-end-line="381" selection-end-column="42" />
               <folding>
                 <element signature="e#401#580#0" expanded="false" />
                 <element signature="e#634#2272#0" expanded="false" />
                 <element signature="e#2327#4334#0" expanded="false" />
                 <element signature="e#4394#5449#0" expanded="false" />
+                <element signature="n#!!block;n#youWin#0" expanded="false" />
+                <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+                <element signature="n#!!block;n#draw#0" expanded="false" />
+                <element signature="n#!!block;n#whileADraw#0" expanded="false" />
                 <element signature="n#!!block;n#createGameField#0" expanded="false" />
                 <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
                 <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -41,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/Controllers/GameController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.68039536">
-              <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -408,6 +412,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -442,6 +450,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -498,6 +510,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -530,6 +546,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -562,6 +582,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -608,6 +632,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -640,6 +668,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -672,6 +704,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -704,6 +740,10 @@
             <element signature="e#634#2272#0" expanded="false" />
             <element signature="e#2327#4334#0" expanded="false" />
             <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
             <element signature="n#!!block;n#createGameField#0" expanded="false" />
             <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
             <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
@@ -791,24 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="461" column="3" selection-start-line="461" selection-start-column="3" selection-end-line="461" selection-end-column="3" />
-          <folding>
-            <element signature="e#401#580#0" expanded="false" />
-            <element signature="e#634#2272#0" expanded="false" />
-            <element signature="e#2327#4334#0" expanded="false" />
-            <element signature="e#4394#5449#0" expanded="false" />
-            <element signature="n#!!block;n#createGameField#0" expanded="false" />
-            <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
-            <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
-            <element signature="n#!!block;n#sendResponse#0" expanded="false" />
-            <element signature="n#!!block;n#setResponseHeaders#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Controllers/RootController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14003295">
@@ -859,9 +881,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Controllers/GameController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.68039536">
-          <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57990116">
+          <caret line="381" column="42" selection-start-line="381" selection-start-column="42" selection-end-line="381" selection-end-column="42" />
+          <folding>
+            <element signature="e#401#580#0" expanded="false" />
+            <element signature="e#634#2272#0" expanded="false" />
+            <element signature="e#2327#4334#0" expanded="false" />
+            <element signature="e#4394#5449#0" expanded="false" />
+            <element signature="n#!!block;n#youWin#0" expanded="false" />
+            <element signature="n#!!block;n#opponentWin#0" expanded="false" />
+            <element signature="n#!!block;n#draw#0" expanded="false" />
+            <element signature="n#!!block;n#whileADraw#0" expanded="false" />
+            <element signature="n#!!block;n#createGameField#0" expanded="false" />
+            <element signature="n#!!block;n#generateGameToken#0" expanded="false" />
+            <element signature="n#!!block;n#generateAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#sendResponse#0" expanded="false" />
+            <element signature="n#!!block;n#setResponseHeaders#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

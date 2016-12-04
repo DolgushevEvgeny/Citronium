@@ -77,7 +77,7 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
                 clearInterval(intervalCanIPlay);
             } else if (response.code == 5 && response.status != "error") {
                 canPlay = false;
-                console.log(response.message);
+                createParagraph(response.message);
             } else if (response.code == 11 && response.status != "error") {
                 canPlay = false;
                 createParagraph(response.message);
