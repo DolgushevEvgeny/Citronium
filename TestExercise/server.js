@@ -219,18 +219,11 @@ app.post('/make_a_move', function(request, response) {
                     answer.message = "Player make move";
                     var gameSituation = checkGameField(newGameRecord.game_field, playerRecord.queue);
                     switch (gameSituation) {
-                      case 0: draw(answer, response); break;
+                      case 0: draw(answer, response, playerRecord.queue); break;
                       case 1: youWin(answer, response, playerRecord.player, playerRecord.queue); break;
                       case 2: opponentWin(answer, response, playerRecord.player, playerRecord.queue); break;
                       case 3: whileADraw(answer, response, playerRecord.queue); break;
                     }
-
-                    //if (checkGameField(newGameRecord.game_field)) {
-                    //  answer.message = "Player " + playerRecord.player + " won";
-                    //}
-
-                    //answer.playerQueue = playerRecord.queue;
-                    //sendResponse(answer, response);
                   });
                 }
               );
@@ -275,7 +268,7 @@ app.get('/can_i_play', function(request, response) {
 
                   var gameSituation = checkGameField(gameRecord.game_field, playerRecord.queue);
                   switch (gameSituation) {
-                    case 0: draw(answer, response); break;
+                    case 0: draw(answer, response, playerRecord.queue); break;
                     case 1: youWin(answer, response, playerRecord.player, playerRecord.queue); break;
                     case 2: opponentWin(answer, response, playerRecord.player, playerRecord.queue); break;
                     case 3: whileADraw(answer, response, playerRecord.queue); break;
@@ -310,15 +303,15 @@ function youWin(answer, response, name, playerQueue) {
 
 function opponentWin(answer, response, name, playerQueue) {
   answer.code = 12;
-  answer.message = "Player " + name + " win";
+  answer.message = "Player " + name + " lose";
   answer.playerQueue = playerQueue;
   sendResponse(answer, response);
 }
 
 //если ничья
-function draw(answer, response) {
+function draw(answer, response, playerQueue) {
   answer.code = 11;
-  answer.playerQueue = playerRecord.queue;
+  answer.playerQueue = playerQueue;
   answer.message = "No one won";
   sendResponse(answer, response);
 }
@@ -403,7 +396,6 @@ function checkGameField(gameField, playerQueue) {
           } else {
             return 2;
           }
-          //return true;
         }
 
         //Смотрим вниз и вправо от текущей клетки
@@ -422,7 +414,6 @@ function checkGameField(gameField, playerQueue) {
           } else {
             return 2;
           }
-          //return true;
         }
 
         //Смотрим вниз и влево от текущей клетки
@@ -441,7 +432,6 @@ function checkGameField(gameField, playerQueue) {
           } else {
             return 2;
           }
-          //return true;
         }
 
         //Смотрим вниз от текущей клетки
@@ -458,7 +448,6 @@ function checkGameField(gameField, playerQueue) {
           } else {
             return 2;
           }
-          //return true;
         }
       } else {
         ++emptyCells;
@@ -471,5 +460,4 @@ function checkGameField(gameField, playerQueue) {
   } else {
     return 3;
   }
-  //return false;
 }

@@ -13,17 +13,14 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
         requestData.game_token = gameToken;
 
         ApiService.hasPlayerJoin().create(requestData).$promise.then(function(response) {
-            //console.log(response);
             if (response.code == 6 && response.status != "error") {
                 canPlay = true;
                 createParagraph(response.message);
-                //console.log(response.message);
                 clearInterval(intervalHasPlayerJoin);
             } else {
                 if (response.code == 7 && response.status != "error") {
                     canPlay = false;
                     createParagraph(response.message);
-                    //console.log(response.message);
                 }
             }
         });
@@ -40,20 +37,17 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
                 if (response.code == 8 && response.status != "error") {
                     canPlay = false;
                     createParagraph(response.message);
-                    //console.log(response.message);
                     gameField = response.game_field;
                     deployGameField();
-                    //todo спамить сервер пока игроку не разрешат сходить
-                    intervalCanIPlay = setInterval("canIPlay()", 4000);
+                    intervalCanIPlay = setInterval("canIPlay()", 2000);
                 } else if (response.code == 9 && response.status != "error") {
                     canPlay = true;
                     createParagraph(response.message);
-                    //console.log(response.message);
                 } else if (response.code == 10 && response.status != "error") {
                     clearInterval(intervalCanIPlay);
                     canPlay = false;
                     createParagraph(response.message);
-                    //console.log(response.message);
+                    addLink();
                     gameField = response.game_field;
                     deployGameField();
                     alert("YOU WIN!");
@@ -61,7 +55,7 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
                     clearInterval(intervalCanIPlay);
                     canPlay = false;
                     createParagraph(response.message);
-                    //console.log(response.message);
+                    addLink();
                     gameField = response.game_field;
                     deployGameField();
                     alert("DRAW!");
@@ -78,28 +72,25 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
             if (response.code == 4 && response.status != "error") {
                 canPlay = true;
                 createParagraph(response.message);
-                //console.log(response.message);
                 gameField = response.game_field;
                 deployGameField();
-                //todo перестать спамить сервер пока игроку не разрешат сходить
                 clearInterval(intervalCanIPlay);
             } else if (response.code == 5 && response.status != "error") {
                 canPlay = false;
                 console.log(response.message);
-                //todo спамить сервер пока игроку не разрешат сходить
             } else if (response.code == 11 && response.status != "error") {
                 canPlay = false;
                 createParagraph(response.message);
-                //console.log(response.message);
                 gameField = response.game_field;
+                addLink();
                 deployGameField();
                 clearInterval(intervalCanIPlay);
                 alert("DRAW!");
             } else if (response.code == 12 && response.status != "error") {
                 canPlay = false;
                 createParagraph(response.message);
-                //console.log(response.message);
                 gameField = response.game_field;
+                addLink();
                 deployGameField();
                 clearInterval(intervalCanIPlay);
                 alert("YOU LOSE!");
@@ -116,7 +107,7 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
 
         var newGameTable = angular.element('<section class="table col-lg-6"></section>');
         for (var i = 0; i < gameField.length; ++i) {
-            var row = angular.element('<section></section>');
+            var row = angular.element('<section class="table_row"></sectionclass>');
             for (var j = 0; j < gameField[i].length; ++j) {
                 var cell = angular.element('<section class="cell" onclick="makeMove(' + i + ',' + j + ')"></section>');
                 if (gameField[i][j] == 1) {
@@ -129,6 +120,8 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
             }
 
             newGameTable.append(row);
+            var clearRow = angular.element('<section class="clear"></section>');
+            newGameTable.append(clearRow);
         }
 
         angular.element(document.querySelector(".main")).prepend(newGameTable);
@@ -138,6 +131,11 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
         var messageParagraph = angular.element('<p class="message"></p>');
         messageParagraph.text(message);
         messagesSection.append(messageParagraph);
+    };
+
+    addLink = function() {
+        var link = angular.element('<a href="/">Go to Root</a>');
+        angular.element(document.querySelector(".container")).prepend(link);
     };
 
     accessToken = dataService.getAccessToken();
@@ -150,9 +148,9 @@ app.controller('GameController', ['$scope', 'ApiService', 'dataService', functio
         var gameTokenField = angular.element(document.querySelector(".gameToken"));
         gameTokenField.text(gameToken);
         deployGameField();
-        intervalHasPlayerJoin = setInterval("hasPlayerJoin()", 4000);
+        intervalHasPlayerJoin = setInterval("hasPlayerJoin()", 2000);
     } else {
         deployGameField();
-        intervalCanIPlay = setInterval("canIPlay()", 4000);
+        intervalCanIPlay = setInterval("canIPlay()", 2000);
     }
 }]);
