@@ -1,16 +1,25 @@
 body {
     background-color: greenyellow;
 }
-.actions {
-    text-align: center;
-}
+
 .ai {
     background-image: url('../img/ai.jpg');
 }
+
 .container {
-    margin: 50px auto;
-    width: 300px;
+    /*margin: 50px auto;*/
+    /*width: 300px;*/
 }
+
+.gameToken {
+    margin: 20px 0px;
+    font-size: 30px;
+}
+
+.table {
+
+}
+
 .cell {
     background-color: white;
     border: 2px solid black;
@@ -18,9 +27,11 @@ body {
     height: 96px;
     width: 96px;
 }
+
 .cell:hover {
     border-color: red;
 }
+
 .player {
     background-image: url('../img/player.jpg');
 }
