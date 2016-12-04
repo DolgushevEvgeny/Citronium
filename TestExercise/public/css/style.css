@@ -7,25 +7,30 @@ body {
 }
 
 .container {
-    /*margin: 50px auto;*/
-    /*width: 300px;*/
+    margin: 0 auto;
 }
 
 .gameToken {
-    margin: 20px 0px;
+    margin: 20px 0;
     font-size: 30px;
 }
 
-.table {
+.message {
+    text-align: center;
+}
 
+.clear {
+    clear: both;
 }
 
 .cell {
     background-color: white;
     border: 2px solid black;
     float: left;
-    height: 96px;
-    width: 96px;
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .cell:hover {
@@ -34,4 +39,8 @@ body {
 
 .player {
     background-image: url('../img/player.jpg');
+}
+
+.gameForm {
+    margin-top: 40px;
 }
